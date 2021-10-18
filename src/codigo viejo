@@ -1,0 +1,60 @@
+Restaurante resto = new Restaurante();
+        System.out.println("Mesas Disponibles: ");
+        resto.mesasDisponibles();
+        int cerrado = 0;
+
+
+    while(cerrado != 1){
+            Mesa mesa1 = new Mesa(5);
+            mesa1.setPersonasSentadas(4);
+            resto.Sentarse(mesa1);
+
+            //Mesa realiza pedido
+            
+            Thread.sleep(1500);
+
+            Hamburguesa burger1 = new Hamburguesa(1300,"Doble Cheddar", 3);
+            Hamburguesa burger2 = new Hamburguesa(1000, "Simple", 1);
+            PapasFritas papas1= new PapasFritas(700,"Con Provenzal", 4);
+            PapasFritas papas2 = new PapasFritas(500, "Simple", 2);
+
+            System.out.println("Mesa realizando pedido....");
+
+            Vector<Comidas> pedidomesa1 = new Vector<>();
+
+            pedidomesa1.add(burger1);
+            pedidomesa1.add(burger2);
+            pedidomesa1.add(papas1);
+            pedidomesa1.add(papas2);
+
+            mesa1.setPedidos(pedidomesa1);
+
+            double gastoTotal= 0.0; 
+
+            for (int i = 0; i < pedidomesa1.size(); i++) {
+                gastoTotal += pedidomesa1.get(i).getPrecio();
+            }
+            mesa1.setCuenta(gastoTotal);
+            System.out.println("La cuenta es: " + gastoTotal);
+            resto.sumaGanancias(mesa1.getCuenta());
+
+            //Mesa 2
+
+            Mesa mesa2 = new Mesa(4);
+            mesa1.setPersonasSentadas(2);
+            resto.Sentarse(mesa1);
+
+            //Codigo en construccion;
+
+            System.out.println("Ingrese 1 para terminar, sino, otro numero para continuar");
+            cerrado = sc.nextInt();
+
+        }
+
+        System.out.print("Las ganancias del día son: ");
+		resto.verGananciasDia();
+		System.out.println("Mesas ocupadas al final: ");
+		resto.mostrarMesas();
+
+
+        System.out.println("Fin");
